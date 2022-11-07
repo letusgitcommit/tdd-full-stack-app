@@ -79,3 +79,4 @@ repos:
         -   django-browser-reload==1.6.0
         -   rich==12.6.0
         -   django-stubs==1.13.0
+        -   selenium==4.6.0
