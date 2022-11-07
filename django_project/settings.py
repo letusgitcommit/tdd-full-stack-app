@@ -19,6 +19,9 @@ from environs import Env
 
 # 0. Initial Setup
 
+
+# Capture the command passed to manage.py; if it is "test" do not load the .env file.
+# We will override the necessary settings with the custom TestRunner.
 try:
     command = sys.argv[1]
 except IndexError:
@@ -49,8 +52,8 @@ INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
-    "django.contrib.sessions",
     "django.contrib.messages",
+    "django.contrib.sessions",
     "django.contrib.staticfiles",
 ]
 
