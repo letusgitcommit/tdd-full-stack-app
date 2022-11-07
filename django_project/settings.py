@@ -12,25 +12,38 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from __future__ import annotations
 
+import sys
 from pathlib import Path
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+from environs import Env
+
+# 0. Initial Setup
+
+try:
+    command = sys.argv[1]
+except IndexError:
+    command = "help"
+
+if command != "test":
+    env = Env()
+    env.read_env()
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-zo@w&1mfsd2@e4jx4@a^z_b@ev)di=a2+g(l093s4d4x^*hv83"
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# 1. Core Settings
 
 ALLOWED_HOSTS: list[str] = []
 
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
+}
 
-# Application definition
+DEBUG = True
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INSTALLED_APPS = [
     "django.contrib.admin",
@@ -40,6 +53,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 ]
+
+LANGUAGE_CODE = "en-us"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
@@ -52,6 +67,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "django_project.urls"
+
+SECRET_KEY = "django-insecure-zo@w&1mfsd2@e4jx4@a^z_b@ev)di=a2+g(l093s4d4x^*hv83"
 
 TEMPLATES = [
     {
@@ -69,22 +86,19 @@ TEMPLATES = [
     },
 ]
 
+TEST_RUNNER = "django_project.core.tests.CustomTestRunner"
+
+TIME_ZONE = "UTC"
+
+USE_I18N = False
+
+USE_TZ = True
+
 WSGI_APPLICATION = "django_project.wsgi.application"
 
+# 2. Contrib Settings
 
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
+# auth
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -103,25 +117,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
-LANGUAGE_CODE = "en-us"
-
-TIME_ZONE = "UTC"
-
-USE_I18N = True
-
-USE_TZ = True
-
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
+# staticFiles
 
 STATIC_URL = "static/"
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
-
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
