@@ -49,6 +49,9 @@ DEBUG = True
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INSTALLED_APPS = [
+    # Third-Party
+    "django_read_only",
+    # Django Defaults
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -123,3 +126,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # staticFiles
 
 STATIC_URL = "static/"
+
+
+# 3. Third-Party Settings
+
+# django-read-only
+DJANGO_READ_ONLY = not env.bool("DEVELOPMENT")
