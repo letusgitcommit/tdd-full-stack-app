@@ -50,6 +50,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 INSTALLED_APPS = [
     # Third-Party
+    "debug_toolbar",
     "django_read_only",
     # Django Defaults
     "django.contrib.admin",
@@ -60,10 +61,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
 ]
 
+INTERNAL_IPS = ["127.0.0.1"]
+
 LANGUAGE_CODE = "en-us"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",

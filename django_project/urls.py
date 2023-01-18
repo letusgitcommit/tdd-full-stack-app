@@ -16,8 +16,17 @@ Including another URLconf
 from __future__ import annotations
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import include, path
+from environs import Env
+
+env = Env()
+env.read_env()
 
 urlpatterns = [
     path("admin/", admin.site.urls),
 ]
+
+if env.bool("DEVELOPMENT"):
+    urlpatterns += [
+        path("__debug__/", include("debug_toolbar.urls")),
+    ]
