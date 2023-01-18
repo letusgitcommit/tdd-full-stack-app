@@ -13,6 +13,8 @@ Test-Driven Development with Python - Harry Percival
 ***
 
 ## Installation Instructions
+
+### Pip-tools / Pip-compile
 First install pip-tools, which will give you access to pip-compile. You'll need
 to run pip-compile in the root project directory to make sure that your
 dependencies are gathered correctly depending on your development platform's
@@ -27,8 +29,10 @@ After that, from the project's root directory you should be able to run:
 python -m pip install -r requirements.txt
 ```
 
+### pre-commit
 Next you'll need to install pre-commit to gain the full developer experience.
 
+### Geckodriver for Selenium FTs
 To run the functional / integration tests you will need to make sure that
 geckodriver for Firefox is accessible via some path.
 
